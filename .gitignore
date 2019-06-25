@@ -1,0 +1,11 @@
+#exclude original folder and jpg files
+monkbrill/
+**/myenv
+__pycache__/
+**/.idea
+*.jpg
+*.png
+*.pgm
+**/.vscode
+*.pyc
+*.log
