@@ -1,6 +1,7 @@
 #exclude original folder and jpg files
 monkbrill/
 **/myenv
+**/venv
 __pycache__/
 **/.idea
 *.jpg

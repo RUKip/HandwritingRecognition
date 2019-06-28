@@ -1,4 +1,5 @@
-import codecs, re, letters_unicode
+import codecs, re
+
 
 def iterative_levenshtein(s, t):
     """ 
@@ -9,8 +10,8 @@ def iterative_levenshtein(s, t):
         distance between the first i characters of s and the 
         first j characters of t
     """
-    rows = len(s)+1
-    cols = len(t)+1
+    rows = len(s) + 1
+    cols = len(t) + 1
     dist = [[0 for x in range(cols)] for x in range(rows)]
     # source prefixes can be transformed into empty strings 
     # by deletions:
@@ -20,36 +21,31 @@ def iterative_levenshtein(s, t):
     # by inserting the characters
     for i in range(1, cols):
         dist[0][i] = i
-        
+
     for col in range(1, cols):
         for row in range(1, rows):
-            if s[row-1] == t[col-1]:
+            if s[row - 1] == t[col - 1]:
                 cost = 0
             else:
                 cost = 1
-            dist[row][col] = min(dist[row-1][col] + 1,      # deletion
-                                 dist[row][col-1] + 1,      # insertion
-                                 dist[row-1][col-1] + cost) # substitution
+            dist[row][col] = min(dist[row - 1][col] + 1,  # deletion
+                                 dist[row][col - 1] + 1,  # insertion
+                                 dist[row - 1][col - 1] + cost)  # substitution
 
-    
- 
     return dist[row][col]
 
-#first argument is string, second file with goal answer
-def getscore(own_answer,goal_filename):
+
+# first argument is string, second file with goal answer
+def getscore(own_answer, goal_filename):
     f = codecs.open(goal_filename, encoding='utf-8')
-    
-    goal = "" 
+
+    goal = ""
     for line in f:
         l = re.sub(r"\W", "", line)
         for c in l:
             goal += c
-    
-    print("Distance: ", iterative_levenshtein(goal, own_answer))
-    
-    
-getscore("A","124.txt")
-    
 
- 
-      
+    print("Distance: ", iterative_levenshtein(goal, own_answer))
+
+
+getscore("A", "124.txt")
