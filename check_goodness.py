@@ -48,4 +48,29 @@ def getscore(own_answer, goal_filename):
     print("Distance: ", iterative_levenshtein(goal, own_answer))
 
 
-getscore("A", "124.txt")
+def ourscore(own_filename, goal_filename):
+    f_goal = codecs.open(goal_filename, encoding='utf-8')
+    goal = ""
+    for line in f_goal:
+        l = re.sub(r"\W", "", line)
+        for c in l:
+            goal += c
+    f_goal.close()
+
+    f_own = codecs.open(own_filename, encoding='utf-8')
+    own = ""
+    for line in f_own:
+        l = re.sub(r"\W", "", line)
+        for c in l:
+            own += c
+    f_own.close()
+
+    print("Levenshtein distance for {}".format(goal_filename))
+    print("Their answer: len({}), {}".format(len(goal), goal))
+    print("Our answer: len({}), {}".format(len(own), own))
+    print("Distance: ", iterative_levenshtein(goal, own))
+
+
+# getscore("A", "124.txt")
+# ourscore("results-Beter-goed-gejat/P25-Fg001-fused.txt", "testset/P25.txt")
+ourscore("results-Beter-goed-gejat/124-Fg004-fused.txt", "testset/124.txt")
